@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Электронный журнал</h1>
+<div class="stats">
+    <div class="stat"><b>{{ students }}</b><span>Студентов</span></div>
+    <div class="stat"><b>{{ groups }}</b><span>Групп</span></div>
+    <div class="stat"><b>{{ grades }}</b><span>Оценок</span></div>
+</div>
+<h2>Последние оценки</h2>
+<ul class="feed">
+    {% for g in latest %}
+    <li><a href="{% url 'journal:student' g.student.pk %}">{{ g.student.full_name }}</a> — {{ g.subject.name }} <b class="b{{ g.value }}">{{ g.value }}</b></li>
+    {% empty %}
+    <li>Оценок пока нет.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

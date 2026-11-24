@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Студенты</h1>
+<form method="get" class="search">
+    <input type="text" name="q" value="{{ q }}" placeholder="Поиск...">
+    <button type="submit">Найти</button>
+</form>
+{% if page_obj.object_list %}
+<table>
+    <tr><th>ФИО</th><th>Группа</th><th>Зачётка</th></tr>
+    {% for s in page_obj %}
+    <tr><td><a href="{% url 'journal:student' s.pk %}">{{ s.full_name }}</a></td><td>{{ s.group.name }}</td><td>{{ s.record_book }}</td></tr>
+    {% endfor %}
+</table>
+{% else %}<p>Студентов нет.</p>{% endif %}
+{% endblock %}

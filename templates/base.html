@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Журнал</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <a href="{% url 'journal:home' %}" class="logo">📚 Колледж</a>
+        <button id="burger">☰</button>
+        <nav id="nav">
+            <a href="{% url 'journal:home' %}">Главная</a>
+            <a href="{% url 'journal:students' %}">Студенты</a>
+            <a href="{% url 'journal:grades' %}">Оценки</a>
+            <a href="{% url 'journal:grade_add' %}">Добавить</a>
+            <a href="{% url 'journal:about' %}">О колледже</a>
+        </nav>
+    </header>
+    <main>
+        {% for msg in messages %}<div class="msg {{ msg.tags }}">{{ msg }}</div>{% endfor %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer>© 2026 Электронный журнал. Вариант 14</footer>
+    <script src="{% static 'main.js' %}"></script>
+</body>
+</html>
